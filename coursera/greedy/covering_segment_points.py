@@ -13,6 +13,7 @@ def optimal_points(segments):
             points.add(right_most)
         else:
             right_most = s.end
+            points.add(right_most)
     return points
 
 if __name__ == '__main__':

@@ -1,20 +1,18 @@
 import sys
 
-def binary_search(a, x):
-    left, right = 0, len(a)
+def binary_search(a, left, right, x):
 
     if right < left:
         return -1
 
-    mid = int(left + (right - left)/2)
+    mid = int(left + ((right - left)/2))
 
-    if a[mid] == x:
+    if x == a[mid]:
         return mid
-
-    if x < a[mid]:
-        return binary_search(a[left:mid-1], x)
-    elif a[mid] > x:
-        return binary_search(a[mid+1:right], x)
+    elif x < a[mid]:
+        return binary_search(a, left, mid-1, x)
+    elif x > a[mid]:
+        return binary_search(a, mid+1, right, x)
 
 def linear_search(a, x):
     for i in range(len(a)):
@@ -29,7 +27,7 @@ if __name__ == '__main__':
     m = data[n + 1]
     a = data[1 : n + 1]
     for x in data[n + 2:]:
-        index = binary_search(a, x)
+        index = binary_search(a, 0, len(a) - 1, x)
         if index == None:
             index = -1
         print(index, end = ' ')
