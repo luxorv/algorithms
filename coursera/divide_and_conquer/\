@@ -1,0 +1,27 @@
+import sys
+
+def get_majority_element(a, left, right):
+    if left == right:
+        return -1
+    if left + 1 == right:
+        return a[left]
+
+    mid = int(left + ((right - left)/2))
+
+    major_left = get_majority_element(a, left, mid)
+    major_right = get_majority_element(a, mid, right)
+
+    print(major_left, major_right)
+
+    if major_right == major_right and (major_right != 1 or major_left != -1):
+        return major_left
+
+    return -1
+
+if __name__ == '__main__':
+    input = sys.stdin.read()
+    n, *a = list(map(int, input.split()))
+    if get_majority_element(a, 0, n) != -1:
+        print(1)
+    else:
+        print(0)
