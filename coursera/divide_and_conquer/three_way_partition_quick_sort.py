@@ -5,16 +5,19 @@ import random
 def partition3(a, l, r):
     x = a[l]
     m1 = l
-    m2 = l
-    for i in range(l + 1, r + 1):
-        if a[i] < x:
-            m1 += 1
-            a[i], a[m1] = a[m1], a[i]
-        elif a[i] == x:
-            m2 += 1
-            a[i], a[m2] = a[m2], a[i]
+    m2 = r
+    i = l
 
-    a[l], a[m1] = a[m1], a[l]
+    while i <= m2:
+        if a[i] < x:
+            a[i], a[m1] = a[m1], a[i]
+            m1 += 1
+            i += 1
+        elif a[i] > x:
+            a[i], a[m2] = a[m2], a[i]
+            m2 -= 1
+        elif a[i] == x:
+            i += 1
 
     return m1, m2
 
