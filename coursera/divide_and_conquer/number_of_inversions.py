@@ -1,27 +1,34 @@
 import sys
 
-def get_number_of_inversions(a, b, left, right):
-    number_of_inversions = 0
-    if right - left <= 1:
-        return number_of_inversions
-    ave = (left + right) // 2
-    number_of_inversions += get_number_of_inversions(a, b, left, ave)
-    number_of_inversions += get_number_of_inversions(a, b, ave, right)
 
-    j = left + 1
-    for i in range(left, ave):
-        if a[i] > a[j]:
-            number_of_inversions += 1
+def get_number_of_inversions(a):
 
-    j = ave + 1
-    for i in range(ave, right - 1):
-        if a[i] > a[j]:
-            number_of_inversions += 1
+    if len(a) <= 1:
+        return 0, a
 
-    return number_of_inversions
+    mid = len(a) // 2
+
+    rb, b = get_number_of_inversions(a[:mid])
+    rc, c = get_number_of_inversions(a[mid:])
+
+    d = []
+    rbc = 0
+
+    while len(b) and len(c):
+
+        if b[0] <= c[0]:
+            d.append(b.pop(0))
+        else:
+            d.append(c.pop(0))
+            rbc += len(b)
+
+    d += b + c
+
+    return (rb + rc + rbc), d
+
 
 if __name__ == '__main__':
     input = sys.stdin.read()
     n, *a = list(map(int, input.split()))
     b = n * [0]
-    print(get_number_of_inversions(a, b, 0, len(a)))
+    print(get_number_of_inversions(a)[0])
