@@ -23,9 +23,9 @@ def get_majority_element(a, left, right):
 
     half = mid - left
 
-    if cntr >= half:
+    if cntr > half:
         return rm
-    elif cntl >= half:
+    elif cntl > half:
         return lm
 
     return -1
