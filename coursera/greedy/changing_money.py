@@ -3,7 +3,7 @@ import sys
 def get_change(n):
 
     coins, i = (0, 0)
-    denominations = [10, 5, 1]
+    denominations = [8, 4, 2]
 
     while n > 0 and i <= len(denominations):
         while denominations[i] <= n:
